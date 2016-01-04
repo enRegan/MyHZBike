@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyHZBike</string>
+    <string name="MyHZBike">自行车</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_back">退出</string>
+</resources>
