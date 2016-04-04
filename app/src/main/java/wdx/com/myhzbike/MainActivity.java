@@ -32,9 +32,20 @@ import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import wdx.com.myhzbike.iface.HttpCallBack;
+import wdx.com.myhzbike.utils.MyHttpConnectionTask;
+import wdx.com.myhzbike.utils.MyLogUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher, OnGetPoiSearchResultListener, BaiduMap.OnMapStatusChangeListener, OnGetGeoCoderResultListener {
     private MapView mMapView;
@@ -46,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public BDLocationListener myListener = new MyLocationListener();
     boolean isFirstLoc = true; // 是否首次定位
 
+    private HashMap<Integer, ArrayList> allItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +72,104 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
         et_search.addTextChangedListener(this);
         initLocation();
-//        FtesuZNN8u6TdNbGLYIotaGn
+
+    }
+    private void search(){
+        MyHttpConnectionTask task = new MyHttpConnectionTask(new HttpCallBack() {
+            @Override
+            public void callBackDate(String result) {
+//                MyLogUtil.LogV("wdx",result);
+                Document document = Jsoup.parse(result);
+                Elements elements = document.getElementsByTag("li");
+                ArrayList<String> list = new ArrayList<>();
+                int num = 0;
+                for (Element element :elements) {
+                    String s = element.attr("onclick");
+                    if(s != null && !"".equals(s)){
+                        list.add(s);
+                    }
+                }
+                allItem = new HashMap<>();
+                allItem.put(num++, list);
+                for(int i = 0; i < allItem.size(); i++){
+                    ArrayList<String> item = allItem.get(i);
+                    for (String ss : item) {
+                        try {
+                            MyLogUtil.LogV("wdx", "sp  :  " + ss);
+                            ss = ss.replace("%","\\");
+                            MyLogUtil.LogV("wdx", "sp unicodeToUtf8  :  " + unicodeToUtf8(ss));
+
+                        } catch (Exception e) {
+                            MyLogUtil.LogV("wdx", "Exception : " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+
+//                for (String onclickString : list){
+//                    System.out.print(onclickString);
+//                    try {
+//                        MyLogUtil.LogV("wdx",onclickString);
+//                        onclickString = onclickString.replace("%","\\");
+//                        MyLogUtil.LogV("wdx","\\\\\\\\\\" + onclickString);
+//                        onclickString = unicodeToUtf8(onclickString);
+//                        MyLogUtil.LogV("wdx","utu" + onclickString);
+//                        MyLogUtil.LogV("wdx","decode" + URLDecoder.decode(onclickString.replace("%","\\"),"unicode"));
+//                    }catch (Exception e){
+//                        MyLogUtil.LogV("wdx",e.getMessage());
+//                        e.printStackTrace();
+//                    }
+//                    int position = 0;
+//                    ArrayList<String> mys = new ArrayList<>();
+//                    for (int p = 0; p < onclickString.length(); p++){
+//                        if(p>0){
+//                            position++;
+//                        }
+//                        MyLogUtil.LogV("wdx","p : " + p +"  position  :  " + position + "  onclickString" + onclickString);
+//                        int p1 = onclickString.indexOf("'",position);
+//                        if(p1 == -1){
+//                            MyLogUtil.LogV("wdx","p1 = -1 ");
+//                            break;
+//                        }
+//                        int p2 = onclickString.indexOf("'",++p1);
+//                        if(p2 == -1){
+//                            MyLogUtil.LogV("wdx","p2 = -1 ");
+//                            break;
+//                        }
+//                        mys.add(onclickString.substring(p1,p2));
+//                        position = p2;
+//                    }
+//                    for (String ss : mys){
+//                        try {
+//                            MyLogUtil.LogV("wdx","sp  :  " + ss);
+//                            MyLogUtil.LogV("wdx","sp decode  :  " + URLDecoder.decode(URLDecoder.decode(ss,"utf-8"),"utf-8"));
+//                        } catch (Exception e) {
+//                        MyLogUtil.LogV("wdx", "Exception : " + e.getMessage());
+//                        e.printStackTrace();
+//                    }
+//                    }
+//                }
+                StringBuilder sb = new StringBuilder(result);
+                String name = sb.substring(sb.indexOf("javascript:window.parent.ZXCClick"));
+            }
+        }, "GET");
+        String key = "武林广场";
+        try {
+            String keyEncoder = URLEncoder.encode(key ,"UTF-8");
+            String[] params = new String[3];
+            params[0] = "http://www.hzbus.cn/Page/BicyleNearby.aspx";
+            params[1] = "w=300&x=120.15841085901&y=30.2674978758945&rnd=8" + "&nm=" + "%E6%AD%A6%E6%9E%97%E5%B9%BF%E5%9C%BA";
+//            params[0] = "http://www.hzbus.cn/HCF.AXD";
+//            params[1] = "rnd=8811" + "&n=" + "%E6%AD%A6" ;
+//            "%u6b66%u6797%u5e7f%u573a"
+//            "%E6%AD%A6%E6%9E%97%E5%B9%BF%E5%9C%BA"
+//            http://www.hzbus.cn/HCF.AXD?n=%E6%AD%A6&rnd=8811
+            MyLogUtil.LogV("wdx",params[0] + "?" + params[1]);
+            task.execute(params);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
@@ -198,6 +307,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             finish();
+        }else if(id == R.id.action_refresh){
+            search();
         }
 
         return super.onOptionsItemSelected(item);
@@ -292,5 +403,78 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
 
     }
+
+    /**
+     *
+     * @param theString
+     * @return String
+     */
+    public static String unicodeToUtf8(String theString) {
+        char aChar;
+        if(theString==null){
+            return "";
+        }
+        int len = theString.length();
+        StringBuffer outBuffer = new StringBuffer(len);
+        for (int x = 0; x < len;) {
+            aChar = theString.charAt(x++);
+            if (aChar == '\\') {
+            aChar = theString.charAt(x++);
+            if (aChar == 'u') {
+                // Read the xxxx
+                int value = 0;
+                for (int i = 0; i < 4; i++) {
+                    aChar = theString.charAt(x++);
+                    switch (aChar) {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            value = (value << 4) + aChar - '0';
+                            break;
+                        case 'a':
+                        case 'b':
+                        case 'c':
+                        case 'd':
+                        case 'e':
+                        case 'f':
+                            value = (value << 4) + 10 + aChar - 'a';
+                            break;
+                        case 'A':
+                        case 'B':
+                        case 'C':
+                        case 'D':
+                        case 'E':
+                        case 'F':
+                            value = (value << 4) + 10 + aChar - 'A';
+                            break;
+                        default:
+                            throw new IllegalArgumentException(
+                                    "Malformed   \\uxxxx   encoding.");
+                    }
+                }
+                outBuffer.append((char) value);
+            } else {
+                if (aChar == 't')
+                    aChar = 't';
+                else if (aChar == 'r')
+                    aChar = 'r';
+                else if (aChar == 'n')
+                    aChar = 'n';
+                else if (aChar == 'f')
+                    aChar = 'f';
+                outBuffer.append(aChar);
+            }
+        } else
+        outBuffer.append(aChar);
+    }
+    return outBuffer.toString();
+}
 
 }

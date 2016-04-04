@@ -20,10 +20,12 @@ import wdx.com.myhzbike.iface.HttpCallBack;
 public class MyHttpConnectionTask extends AsyncTask<String, Integer, String> {
     private HttpCallBack httpCallBack;
     private volatile boolean bRunning = true;
+    private String type = "";
 
-    public MyHttpConnectionTask(HttpCallBack httpCallBack) {
+    public MyHttpConnectionTask(HttpCallBack httpCallBack, String type) {
         super();
         this.httpCallBack = httpCallBack;
+        this.type = type;
     }
 
     @Override
@@ -64,47 +66,65 @@ public class MyHttpConnectionTask extends AsyncTask<String, Integer, String> {
         super.onCancelled();
     }
 
+
     @Override
     protected String doInBackground(String... params) {
         String result = "";
         try {
-            String content;
-            byte[] requestStringBytes = new byte[0];
-            if (params.length >= 2) {
-                content = params[1];
-                requestStringBytes = content.getBytes(HTTP.UTF_8);
-            }
-            String currentUrl = params[0];
-            URL url = new URL(currentUrl);
-
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setDoOutput(true);
-            httpConn.setDoInput(true);
-            httpConn.setUseCaches(false);
-            httpConn.setRequestProperty("Charsert", "UTF-8");
-            httpConn.setRequestMethod("POST");
-            httpConn.setConnectTimeout(12000);
-            httpConn.setReadTimeout(18000);
-            httpConn.setRequestProperty(HTTP.CONTENT_LEN, String.valueOf(requestStringBytes.length));
-            httpConn.setRequestProperty(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded");
-
-            OutputStream outputStream = httpConn.getOutputStream();
-            DataOutputStream dos = new DataOutputStream(outputStream);
-            int len = 0;
-            int left = requestStringBytes.length;
-            while (bRunning && left > 0) {
-                if (left < 1024) {
-                    dos.write(requestStringBytes, len, left);
-                    len += left;
-                } else {
-                    dos.write(requestStringBytes, len, 1024);
-                    len += 1024;
+            HttpURLConnection httpConn = null;
+            if("GET".equals(type)){
+                String currentUrl = params[0] + "?" + params[1];
+                URL url = new URL(currentUrl);
+                httpConn = (HttpURLConnection) url.openConnection();
+                httpConn.setConnectTimeout(5*1000);
+                httpConn.setRequestMethod("GET");
+            }else{
+                String content;
+                byte[] requestStringBytes = new byte[0];
+                if (params.length >= 2) {
+                    content = params[1];
+                    MyLogUtil.LogV("wdx", "content : " + content);
+                    requestStringBytes = content.getBytes(HTTP.UTF_8);
                 }
-                left = requestStringBytes.length - len;
-            }
+                String byyte = "";
+                for(int i = 0; i < requestStringBytes.length; i++){
+                    byyte += requestStringBytes[i];
+                }
+                MyLogUtil.LogV("wdx", "byyte : " + byyte);
 
-            dos.flush();
-            dos.close();
+
+                String currentUrl = params[0];
+                URL url = new URL(currentUrl);
+                httpConn = (HttpURLConnection) url.openConnection();
+                httpConn.setDoOutput(true);
+                httpConn.setDoInput(true);
+                httpConn.setUseCaches(false);
+                httpConn.setRequestProperty("Charsert", "UTF-8");
+                httpConn.setRequestMethod("POST");
+                httpConn.setConnectTimeout(5 * 1000);
+                httpConn.setReadTimeout(10 * 1000);
+                httpConn.setRequestProperty(HTTP.CONTENT_LEN, String.valueOf(requestStringBytes.length));
+                httpConn.setRequestProperty(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded");
+
+                OutputStream outputStream = httpConn.getOutputStream();
+                DataOutputStream dos = new DataOutputStream(outputStream);
+                int len = 0;
+                int left = requestStringBytes.length;
+                while (bRunning && left > 0) {
+                    if (left < 1024) {
+                        dos.write(requestStringBytes, len, left);
+                        len += left;
+                    } else {
+                        dos.write(requestStringBytes, len, 1024);
+                        len += 1024;
+                    }
+                    left = requestStringBytes.length - len;
+                }
+
+                dos.flush();
+                dos.close();
+
+            }
 
 
             if (!bRunning) return "";
@@ -126,6 +146,7 @@ public class MyHttpConnectionTask extends AsyncTask<String, Integer, String> {
                 responseReader.close();
                 result = sb.toString();
 
+
 //                MyLogUtil.LogE("result=" + result);
 
                 if (result == null || result.length() == 0) {
@@ -145,6 +166,7 @@ public class MyHttpConnectionTask extends AsyncTask<String, Integer, String> {
             result = "";
         } finally {
             if (!bRunning) return "";
+
             return result;
         }
     }
