@@ -97,8 +97,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         try {
                             MyLogUtil.LogV("wdx", "sp  :  " + ss);
                             ss = ss.replace("%","\\");
-                            MyLogUtil.LogV("wdx", "sp unicodeToUtf8  :  " + unicodeToUtf8(ss));
+                            ss = unicodeToUtf8(ss);
+                            MyLogUtil.LogV("wdx", "sp unicodeToUtf8  :  " + ss);
 
+                            String[] strings = ss.split(",");
+                            for (int l = 0; l < strings.length; l ++){
+                                strings[l] = strings[l].replaceAll("'","");
+                                strings[l] = strings[l].trim();
+                                if(l == 2){
+                                    MyLogUtil.LogV("wdx", "站点名称 :  " + strings[l]);
+                                }
+                                if(l == 3){
+                                    MyLogUtil.LogV("wdx", "站点地址 :  " + strings[l]);
+                                }
+                                if(l == 4){
+                                    MyLogUtil.LogV("wdx", "营业时间 :  " + strings[l]);
+                                }
+                                if(l == 7){
+                                    MyLogUtil.LogV("wdx", "可借车数 :  " + strings[l]);
+                                }
+                                if(l == 8){
+                                    MyLogUtil.LogV("wdx", "可还车数 :  " + strings[l]);
+                                }
+                                if(l == 9){
+                                    MyLogUtil.LogV("wdx", "经度 :  " + strings[l]);
+                                }
+                                if(l == 10){
+                                    MyLogUtil.LogV("wdx", "纬度 :  " + strings[l]);
+                                }
+                                if(l == 15){
+                                    if(strings[i] != null && "2".equals(strings[i])){
+                                        MyLogUtil.LogV("wdx", "经营状态 :  正常运营");
+                                    }
+                                }
+                                if(l == 11){
+                                    MyLogUtil.LogV("wdx", "联系电话为 :  " + strings[l]);
+                                }
+
+                            }
+//                            for (String s: strings) {
+//                                s = s.replaceAll("'","");
+//                                s = s.trim();
+//                                MyLogUtil.LogV("wdx", "item :  " + s);
+//                            }
                         } catch (Exception e) {
                             MyLogUtil.LogV("wdx", "Exception : " + e.getMessage());
                             e.printStackTrace();
