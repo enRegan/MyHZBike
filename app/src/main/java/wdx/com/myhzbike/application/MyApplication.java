@@ -1,4 +1,4 @@
-package wdx.com.myhzbike;
+package wdx.com.myhzbike.application;
 
 import android.app.Application;
 

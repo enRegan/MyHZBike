@@ -2,8 +2,6 @@ package wdx.com.myhzbike.utils;
 
 import android.os.AsyncTask;
 
-import org.apache.http.protocol.HTTP;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;

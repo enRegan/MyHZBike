@@ -1,4 +1,4 @@
-package wdx.com.myhzbike;
+package wdx.com.myhzbike.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,11 +43,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import wdx.com.myhzbike.R;
 import wdx.com.myhzbike.iface.HttpCallBack;
 import wdx.com.myhzbike.utils.MyHttpConnectionTask;
 import wdx.com.myhzbike.utils.MyLogUtil;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher, OnGetPoiSearchResultListener, BaiduMap.OnMapStatusChangeListener, OnGetGeoCoderResultListener {
+public class BDMainActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher, OnGetPoiSearchResultListener, BaiduMap.OnMapStatusChangeListener, OnGetGeoCoderResultListener {
     private MapView mMapView;
     private BaiduMap mMap;
     private EditText et_search;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_bdmain);
 
         mMapView = (MapView)findViewById(R.id.bmapView);
         et_search = (EditText) findViewById(R.id.et_search);
@@ -310,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll,17);
                 mMap.animateMapStatus(u);
                 String message = "时间：" + location.getTime() + " 地点：" + location.getAddrStr();
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(BDMainActivity.this, message, Toast.LENGTH_LONG).show();
             }
         }
 

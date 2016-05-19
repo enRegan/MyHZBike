@@ -1,4 +1,4 @@
-package wdx.com.myhzbike;
+package wdx.com.myhzbike.modle;
 
 /**
  * Created by Administrator on 2016/1/27.
