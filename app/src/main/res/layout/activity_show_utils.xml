@@ -7,34 +7,22 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context="wdx.com.myhzbike.ui.ShowUtilsActivity"
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/tv_bd"
+        android:id="@+id/tv_have_under_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bdmap"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/holo_green_dark"
-        android:textSize="20dp"
-        android:gravity="center"/>
+        android:text="用来显示添加 \n电话号码 18815291477 \nweb http://www.baidu.com  \nemail 738561806@qq.com \n经纬度 120.00,130.00 \n超链接特殊事件并有下划线"/>
     <TextView
-        android:id="@+id/tv_gd"
+        android:id="@+id/tv_no_have_under_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/gdmap"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/holo_blue_bright"
-        android:textSize="20dp"
-        android:gravity="center"/>
+        android:text="用来显示添加 \n电话号码 18815291477 \nweb http://www.baidu.com  \nemail 738561806@qq.com \n经纬度 120.00,130.00 \n超链接特殊事件无下划线"/>
     <TextView
-        android:id="@+id/tv_show_utils"
+        android:id="@+id/tv_free_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_utils"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/holo_blue_bright"
-        android:textSize="20dp"
-        android:gravity="center"/>
+        android:text="用来显示自定义超链接展示，比如包含客服/客服 、拉巴拉巴巴、还有mm://abcd 其他什么的"/>
 
 </LinearLayout>

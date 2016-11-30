@@ -29,26 +29,41 @@
         android:theme="@style/MyHZBike">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="FtesuZNN8u6TdNbGLYIotaGn" />
+            android:value="WcY8jbeyGuH2ay77W6X2v6GCOFA8ETFO" />
+
+        <meta-data
+        android:name="com.amap.api.v2.apikey"
+        android:value="c0077d9d31fb0d26ae468be590176b1e"/>
 
         <activity
             android:name=".ui.BDMainActivity"
-            android:label="@string/MyHZBike">
-        </activity>
+            android:label="@string/MyHZBike" />
+
+        <service android:name="com.amap.api.location.APSService">
+
+        </service>
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".ui.MainActivity" >
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.GDMainActivity"></activity>
+        <activity android:name=".ui.GDMainActivity" />
+        <activity android:name=".ui.ShowUtilsActivity" />
+        <activity android:name=".ui.ShowUtilsNextActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="@string/free_style_scheme" android:host="@string/free_style_host"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

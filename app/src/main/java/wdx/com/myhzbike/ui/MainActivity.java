@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvBd;
     @InjectView(R.id.tv_gd)
     TextView tvGd;
+    @InjectView(R.id.tv_show_utils)
+    TextView tvShowUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.tv_bd, R.id.tv_gd})
+    @OnClick({R.id.tv_bd, R.id.tv_gd, R.id.tv_show_utils})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_bd:
@@ -33,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.tv_gd:
                 startActivity(new Intent(MainActivity.this,GDMainActivity.class));
+                break;
+            case R.id.tv_show_utils:
+                startActivity(new Intent(MainActivity.this,ShowUtilsActivity.class));
                 break;
         }
     }

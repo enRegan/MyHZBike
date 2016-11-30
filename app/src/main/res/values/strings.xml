@@ -8,4 +8,8 @@
     <string name="action_refresh">刷新</string>
     <string name="bdmap">百度页面</string>
     <string name="gdmap">高德页面</string>
+    <string name="show_utils">展示工具类</string>
+    <string name="free_style_scheme">com.wdx</string>
+    <string name="free_style_host">message_private_url</string>
+
 </resources>
