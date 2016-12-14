@@ -26,29 +26,33 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="我的自行车"
-        android:theme="@style/MyHZBike">
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="FtesuZNN8u6TdNbGLYIotaGn" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="baa717c14d2ca3f6c1dd757311160746" />
 
         <activity
             android:name=".ui.BDMainActivity"
-            android:label="@string/MyHZBike">
-        </activity>
+            android:label="@string/MyHZBike"></activity>
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+        <service android:name="com.amap.api.location.APSService"></service>
 
-        <activity android:name=".ui.MainActivity" >
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.GDMainActivity"></activity>
+        <activity android:name=".ui.GDMainActivity" />
+        <activity android:name=".ui.ShowViewActivity"></activity>
     </application>
 
 </manifest>

@@ -8,4 +8,8 @@
     <string name="action_refresh">刷新</string>
     <string name="bdmap">百度页面</string>
     <string name="gdmap">高德页面</string>
+    <string name="show_view">展示view</string>
+
+    <string name="startLocation">开始定位</string>
+    <string name="stopLocation">停止定位</string>
 </resources>
