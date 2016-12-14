@@ -12,4 +12,8 @@
 
     <string name="startLocation">开始定位</string>
     <string name="stopLocation">停止定位</string>
+    <string name="show_utils">展示工具类</string>
+    <string name="free_style_scheme">com.wdx</string>
+    <string name="free_style_host">message_private_url</string>
+
 </resources>

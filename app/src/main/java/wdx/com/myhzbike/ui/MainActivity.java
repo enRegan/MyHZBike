@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvGd;
     @InjectView(R.id.tv_show_view)
     TextView tvShowView;
+    @InjectView(R.id.tv_show_utils)
+    TextView tvShowUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         MyApplication.densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
     }
 
-    @OnClick({R.id.tv_bd, R.id.tv_gd, R.id.tv_show_view})
+    @OnClick({R.id.tv_bd, R.id.tv_gd, R.id.tv_show_view, R.id.tv_show_utils})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_bd:
@@ -47,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.tv_show_view:
                 startActivity(new Intent(MainActivity.this,ShowViewActivity.class));
+                break;
+            case R.id.tv_show_utils:
+                startActivity(new Intent(MainActivity.this,ShowUtilsActivity.class));
                 break;
         }
     }

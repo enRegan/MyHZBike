@@ -24,5 +24,16 @@
             android:layout_height="wrap_content"
             android:text="@string/startLocation" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_gd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/gdmap"/>
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.amap.api.maps.MapView>
 
 </RelativeLayout>

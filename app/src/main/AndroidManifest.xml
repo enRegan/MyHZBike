@@ -26,17 +26,22 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="我的自行车"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MyHZBike">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="FtesuZNN8u6TdNbGLYIotaGn" />
+            android:value="WcY8jbeyGuH2ay77W6X2v6GCOFA8ETFO" />
+
         <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="baa717c14d2ca3f6c1dd757311160746" />
+        android:name="com.amap.api.v2.apikey"
+        android:value="c0077d9d31fb0d26ae468be590176b1e"/>
 
         <activity
             android:name=".ui.BDMainActivity"
-            android:label="@string/MyHZBike"></activity>
+            android:label="@string/MyHZBike" />
+
+        <service android:name="com.amap.api.location.APSService">
+
+        </service>
 
         <service
             android:name="com.baidu.location.f"
@@ -52,7 +57,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.GDMainActivity" />
-        <activity android:name=".ui.ShowViewActivity"></activity>
+        <activity android:name=".ui.ShowUtilsActivity" />
+        <activity android:name=".ui.ShowUtilsNextActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="@string/free_style_scheme" android:host="@string/free_style_host"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

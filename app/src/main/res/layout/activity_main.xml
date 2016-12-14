@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bdmap"
-        android:background="@mipmap/ic_launcher"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/holo_green_dark"
         android:textSize="20dp"
         android:gravity="center"/>
     <TextView
@@ -18,7 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/gdmap"
-        android:background="@mipmap/ic_launcher"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/holo_blue_bright"
+        android:textSize="20dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/tv_show_utils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_utils"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/holo_blue_bright"
         android:textSize="20dp"
         android:gravity="center"/>
     <TextView

@@ -46,6 +46,7 @@ import java.util.List;
 
 import wdx.com.myhzbike.R;
 import wdx.com.myhzbike.iface.HttpCallBack;
+import wdx.com.myhzbike.utils.LinkifyUtil;
 import wdx.com.myhzbike.utils.MyHttpConnectionTask;
 import wdx.com.myhzbike.utils.MyLogUtil;
 
@@ -64,7 +65,6 @@ public class BDMainActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bdmain);
-
         mMapView = (MapView)findViewById(R.id.bmapView);
         et_search = (EditText) findViewById(R.id.et_search);
         mMap = mMapView.getMap();

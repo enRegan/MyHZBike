@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="wdx.com.myhzbike.ui.ShowUtilsActivity"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_have_under_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用来显示添加 \n电话号码 18815291477 \nweb http://www.baidu.com  \nemail 738561806@qq.com \n经纬度 120.00,130.00 \n超链接特殊事件并有下划线"/>
+    <TextView
+        android:id="@+id/tv_no_have_under_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用来显示添加 \n电话号码 18815291477 \nweb http://www.baidu.com  \nemail 738561806@qq.com \n经纬度 120.00,130.00 \n超链接特殊事件无下划线"/>
+    <TextView
+        android:id="@+id/tv_free_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用来显示自定义超链接展示，比如包含客服/客服 、拉巴拉巴巴、还有mm://abcd 其他什么的"/>
+
+</LinearLayout>
