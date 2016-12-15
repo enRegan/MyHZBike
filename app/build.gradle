@@ -63,4 +63,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile files('libs/AMap3DMap_4.1.2_AMapNavi_1.9.3_AMapSearch_3.6.1_AMapLocation_3.1.0_20161122.jar')
+    compile 'com.android.support:design:24.2.0'
 }

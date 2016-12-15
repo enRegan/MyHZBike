@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,GDMainActivity.class));
                 break;
             case R.id.tv_show_utils:
-                startActivity(new Intent(MainActivity.this,ShowUtilsActivity.class));
+                startActivity(new Intent(MainActivity.this,MaterialDesignActivity.class));
                 break;
         }
     }
