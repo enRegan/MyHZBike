@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.tv_show_utils:
                 startActivity(new Intent(MainActivity.this,ShowUtilsActivity.class));
-                break;
         }
     }
 }

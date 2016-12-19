@@ -46,7 +46,6 @@ import java.util.List;
 
 import wdx.com.myhzbike.R;
 import wdx.com.myhzbike.iface.HttpCallBack;
-import wdx.com.myhzbike.utils.LinkifyUtil;
 import wdx.com.myhzbike.utils.MyHttpConnectionTask;
 import wdx.com.myhzbike.utils.MyLogUtil;
 
@@ -54,8 +53,8 @@ public class BDMainActivity extends AppCompatActivity implements View.OnClickLis
     private MapView mMapView;
     private BaiduMap mMap;
     private EditText et_search;
-    private PoiSearch poiSearch;
-    private GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
+//    private PoiSearch poiSearch;
+//    private GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
     boolean isFirstLoc = true; // 是否首次定位
@@ -216,7 +215,8 @@ public class BDMainActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
+        );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
         int span=1000;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的

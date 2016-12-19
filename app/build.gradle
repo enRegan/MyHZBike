@@ -14,14 +14,18 @@ android {
     packagingOptions {
         exclude 'assets/Icon_bus_station.png'
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug{
+
+        }
     }
-    productFlavors {
-    }
+
+
     sourceSets {
         main {
             jniLibs.srcDir 'libs'
@@ -45,15 +49,8 @@ android {
 }
 
 dependencies {
-    compile files('libs/baidumapapi_base_v3_6_1.jar')
-    compile files('libs/baidumapapi_cloud_v3_6_1.jar')
-    compile files('libs/baidumapapi_map_v3_6_1.jar')
-    compile files('libs/baidumapapi_radar_v3_6_1.jar')
-    compile files('libs/baidumapapi_search_v3_6_1.jar')
-    compile files('libs/baidumapapi_util_v3_6_1.jar')
-    compile files('libs/locSDK_6.13.jar')
-    compile files('libs/jsoup-1.8.3.jar')
-    compile files('libs/AMap2DMap_2.8.1_AMapSearch_3.2.1_AMapLocation_2.4.1_20160425.jar')
+//    compile files('libs/locSDK_6.13.jar')
+//    compile files('libs/jsoup-1.8.3.jar')
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'io.reactivex:rxandroid:1.0.1'
@@ -70,5 +67,13 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.jakewharton:butterknife:6.1.0'
+//    compile files('libs/AMap3DMap_4.1.2_AMapNavi_1.9.3_AMapSearch_3.6.1_AMapLocation_3.1.0_20161122.jar')
+//    compile files('libs/baidumapapi_base_v4_0_0.jar')
+//    compile files('libs/baidumapapi_cloud_v4_0_0.jar')
+//    compile files('libs/baidumapapi_map_v4_0_0.jar')
+//    compile files('libs/baidumapapi_radar_v4_0_0.jar')
+//    compile files('libs/baidumapapi_search_v4_0_0.jar')
+//    compile files('libs/baidumapapi_util_v4_0_0.jar')
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
 }
