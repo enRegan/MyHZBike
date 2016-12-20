@@ -33,37 +33,48 @@ public class OclockView extends View{
         Paint ciclePaint = new Paint();
         ciclePaint.setAntiAlias(true);
         ciclePaint.setStyle(Paint.Style.STROKE);
-        ciclePaint.setStrokeWidth(10);
+        ciclePaint.setStrokeWidth(3);
         ciclePaint.setColor(getResources().getColor(R.color.oclock_cicle));
         float centerX = 500;
         float centerY = 500;
-        float inRadius = 50;
-        float outRadius = 80;
+        float inRadius = 250;
+        float lenght = 50;
+        float outRadius = inRadius + lenght;
 
-        canvas.drawCircle(centerX, centerY, inRadius - 10, ciclePaint);
-        float lenght = 30;
+        canvas.drawCircle(centerX, centerY, inRadius - 50, ciclePaint);
+
+        ciclePaint.setStrokeWidth(5);
         float startX = centerX;
         float stopX = centerX;
         float startY = centerY - inRadius;
         float stopY = centerY - outRadius;
-        float degree = 0;
-        int n = 3;
-        for(int i = 0; i < 13; i++){
-            n = i == 0 | i < 4 | i > 10 ? 3 : -3;
-            degree = (float)Math.sin(Math.toRadians(i * 30));
-            startX = startX + (2 * n * degree);
-            stopX = stopX + (6 * n * degree);
-            startY = startY + (2 * n * degree);
-            stopY = stopY + (6 * n * degree);
+        float degreeX = 0;
+        float degreeY = 0;
+        int count = 180;
+        for(int i = 0; i < count; i++){
+            degreeX = (float)Math.sin(Math.toRadians(i * (360 / count)));
+            degreeY = (float)Math.cos(Math.toRadians(i * (360 / count)));
+            startX = startX + (inRadius * degreeX);
+            stopX = stopX + (outRadius * degreeX);
+            startY = startY + (inRadius - inRadius * degreeY);
+            stopY = stopY + (outRadius - outRadius * degreeY);
             canvas.drawLine(startX, startY, stopX, stopY, ciclePaint);
             MyLogUtil.LogD("wdx", " startX : " + startX);
             MyLogUtil.LogD("wdx", " stopX : " + stopX);
             MyLogUtil.LogD("wdx", " startY : " + startY);
             MyLogUtil.LogD("wdx", " stopY : " + stopY);
-            MyLogUtil.LogD("wdx", " n : " + n);
+            MyLogUtil.LogD("wdx", " degreeX : " + degreeX);
+            MyLogUtil.LogD("wdx", " degreeY : " + degreeY);
+            MyLogUtil.LogD("wdx", " \n");
+
+            startX = centerX;
+            stopX = centerX;
+            startY = centerY - inRadius;
+            stopY = centerY - outRadius;
+//            degreeX = 0;
+//            degreeY = 0;
 //            canvas.rotate(1);
         }
-        canvas.drawCircle(600, 600, 100, ciclePaint);
 
     }
 
