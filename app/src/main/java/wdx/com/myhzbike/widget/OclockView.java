@@ -31,30 +31,36 @@ public class OclockView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint ciclePaint = new Paint();
+        ciclePaint.setAntiAlias(true);
         ciclePaint.setStyle(Paint.Style.STROKE);
         ciclePaint.setStrokeWidth(10);
-        ciclePaint.setColor(getResources().getColor(android.R.color.holo_red_dark));
+        ciclePaint.setColor(getResources().getColor(R.color.oclock_cicle));
+        float centerX = 500;
+        float centerY = 500;
+        float inRadius = 50;
+        float outRadius = 80;
 
-        canvas.drawCircle(300, 300, 100, ciclePaint);
-        float startX = 500;
-        float startY = 530;
-        float stopX = 500;
-        float stopY = 500;
+        canvas.drawCircle(centerX, centerY, inRadius - 10, ciclePaint);
+        float lenght = 30;
+        float startX = centerX;
+        float stopX = centerX;
+        float startY = centerY - inRadius;
+        float stopY = centerY - outRadius;
         float degree = 0;
         int n = 3;
         for(int i = 0; i < 13; i++){
             n = i == 0 | i < 4 | i > 10 ? 3 : -3;
-            MyLogUtil.LogD("wdx", " startX : " + startX);
-            MyLogUtil.LogD("wdx", " stopX : " + stopX);
-            MyLogUtil.LogD("wdx", " startY : " + startY);
-            MyLogUtil.LogD("wdx", " stopY : " + stopY);
-            MyLogUtil.LogD("wdx", " n : " + n);
             degree = (float)Math.sin(Math.toRadians(i * 30));
             startX = startX + (2 * n * degree);
             stopX = stopX + (6 * n * degree);
             startY = startY + (2 * n * degree);
             stopY = stopY + (6 * n * degree);
             canvas.drawLine(startX, startY, stopX, stopY, ciclePaint);
+            MyLogUtil.LogD("wdx", " startX : " + startX);
+            MyLogUtil.LogD("wdx", " stopX : " + stopX);
+            MyLogUtil.LogD("wdx", " startY : " + startY);
+            MyLogUtil.LogD("wdx", " stopY : " + stopY);
+            MyLogUtil.LogD("wdx", " n : " + n);
 //            canvas.rotate(1);
         }
         canvas.drawCircle(600, 600, 100, ciclePaint);
