@@ -2,6 +2,7 @@ package wdx.com.myhzbike.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -15,6 +16,7 @@ import wdx.com.myhzbike.utils.MyLogUtil;
  */
 public class OclockView extends View{
     Oclock oclock;
+    int DEFAULT_HEIGHT = 800;
 
     public OclockView(Context context) {
         super(context);
@@ -24,17 +26,25 @@ public class OclockView extends View{
         this.oclock = oclock;
     }
     public OclockView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public OclockView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.drawColor(Color.rgb(1,129,113));
+
         Paint ciclePaint = new Paint();
         ciclePaint.setAntiAlias(true);
         ciclePaint.setStyle(Paint.Style.STROKE);
         ciclePaint.setStrokeWidth(3);
-        ciclePaint.setColor(getResources().getColor(R.color.oclock_cicle));
+
+//        ciclePaint.setColor(getResources().getColor(R.color.oclock_cicle));
+        ciclePaint.setColor(Color.rgb(35, 147, 133));
         float centerX = 500;
         float centerY = 500;
         float inRadius = 250;
@@ -78,4 +88,21 @@ public class OclockView extends View{
 
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        if(widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(widthSpecSize, DEFAULT_HEIGHT);
+        }
+        else if(widthSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(widthSpecSize, heightSpecSize);
+        }
+        else if(heightSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(widthSpecSize, DEFAULT_HEIGHT);
+        }
+    }
 }

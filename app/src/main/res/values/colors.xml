@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="oclock_bg">#018171</color>
+    <color name="oclock_bg">#018171</color> <!--1, 129, 113 -->
     <color name="oclock_arrow">#cce6e2</color>
-    <color name="oclock_cicle">#42a296</color>
+    <color name="oclock_cicle">#42a296</color> <!--35,147,133-->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="red">#ff0000</color>
