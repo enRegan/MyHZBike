@@ -1,14 +1,13 @@
 package wdx.com.myhzbike.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
-
-import butterknife.OnClick;
-import wdx.com.myhzbike.R;
 import wdx.com.myhzbike.utils.MyLogUtil;
 
 /**
@@ -17,20 +16,57 @@ import wdx.com.myhzbike.utils.MyLogUtil;
 public class OclockView extends View{
     Oclock oclock;
     int DEFAULT_HEIGHT = 800;
+    int widthS = 0;
+    int heightS = 0;
+
+    float centerX = 500;
+    float centerY = 500;
+    float inRadius = 250;
+    float lenght = 50;
+    float outRadius = inRadius + lenght;
+
 
     public OclockView(Context context) {
-        super(context);
+        this(context, new Oclock());
     }
+
     public OclockView(Context context, Oclock oclock) {
         super(context);
         this.oclock = oclock;
+        init(oclock);
     }
+
     public OclockView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     public OclockView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init(){
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        widthS = dm.widthPixels;
+        heightS = dm.heightPixels;
+        MyLogUtil.LogD("widthS : " + widthS);
+        MyLogUtil.LogD("heightS : " + heightS);
+        DEFAULT_HEIGHT = heightS / 2;
+        centerX = widthS / 2;
+        centerY = DEFAULT_HEIGHT / 2;
+        inRadius = widthS / 4;
+        lenght = widthS / 20;
+        outRadius = inRadius + lenght;
+    }
+
+    private void init(Oclock oclock){
+        if(oclock.getWidth() > 0 && oclock.getHeight() > 0){
+            widthS = oclock.getWidth();
+            heightS = oclock.getHeight();
+        }else{
+            init();
+        }
     }
 
     @Override
@@ -45,11 +81,7 @@ public class OclockView extends View{
 
 //        ciclePaint.setColor(getResources().getColor(R.color.oclock_cicle));
         ciclePaint.setColor(Color.rgb(35, 147, 133));
-        float centerX = 500;
-        float centerY = 500;
-        float inRadius = 250;
-        float lenght = 50;
-        float outRadius = inRadius + lenght;
+
 
         canvas.drawCircle(centerX, centerY, inRadius - 50, ciclePaint);
 

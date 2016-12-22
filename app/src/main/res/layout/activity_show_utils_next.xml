@@ -10,7 +10,6 @@
         android:layout_height="wrap_content" />
     <wdx.com.myhzbike.widget.OclockView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/oclock_arrow"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

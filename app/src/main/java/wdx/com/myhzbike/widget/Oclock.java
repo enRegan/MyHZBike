@@ -6,7 +6,7 @@ package wdx.com.myhzbike.widget;
 public class Oclock {
     private int width;
     private int height;
-    private int radius;
+//    private int radius;
 
     public int getWidth() {
         return width;
@@ -24,11 +24,11 @@ public class Oclock {
         this.height = height;
     }
 
-    public int getRadius() {
-        return radius;
-    }
-
-    public void setRadius(int radius) {
-        this.radius = radius;
-    }
+//    public int getRadius() {
+//        return radius;
+//    }
+//
+//    public void setRadius(int radius) {
+//        this.radius = radius;
+//    }
 }
